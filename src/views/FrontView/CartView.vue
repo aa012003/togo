@@ -12,8 +12,8 @@
         <thead>
           <tr>
             <th></th>
-            <th>品名</th>
-            <th style="width: 300px">數量/單位</th>
+            <th>圖片</th>
+            <th style="width: 300px">品名</th>
             <th style="width: 200px">數量</th>
             <th class="text-end">單價</th>
           </tr>
@@ -87,6 +87,7 @@
       </table>
     </div>
     <!-- 表單 -->
+    <div class="container">
     <div class="my-5 row justify-content-center">
       <v-form ref="form" class="col-md-6" v-slot="{ errors }" @submit="createOrder">
         <div class="mb-3">
@@ -131,6 +132,7 @@
         </div>
       </v-form>
     </div>
+  </div>
 </template>
 
 <script>
