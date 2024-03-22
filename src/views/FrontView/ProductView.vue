@@ -14,23 +14,25 @@
   </div>
   <div class="container">
     <div class="mt-4 mb-9 row">
-      <div class="col-md-6">
+      <div class="col-md-6 text-center">
         <img
           :src="product.imageUrl"
           alt=""
           class="object-fit-cover"
-          height="375px"
+          height="351px"
         />
       </div>
       <div class="col-md-6 mt-4 mb-7 text-secondary">
-        <h2 class="mb-0">{{ product.title }}</h2>
-        <p class="fw-bold">NT${{ product.price }}</p>
+        <h2 class="mb-3">{{ product.title }}</h2>
         <p>
           {{ product.description }}
         </p>
         <p>
           {{ product.content }}
         </p>
+        <h5 class="text-danger">
+          <del class="text-secondary h6">NT${{ product.origin_price }}</del>
+          NT${{ product.price }}</h5>
         <div class="input-group">
           <select name="" id="" class="form-select mb-3" v-model="qty">
             <option :value="i" v-for="i in 20" :key="i">{{ i }}</option>
