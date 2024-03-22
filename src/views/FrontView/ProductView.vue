@@ -14,15 +14,15 @@
   </div>
   <div class="container">
     <div class="mt-4 mb-9 row">
-      <div class="col-md-5">
+      <div class="col-md-6">
         <img
           :src="product.imageUrl"
           alt=""
           class="object-fit-cover"
-          height="400px"
+          height="375px"
         />
       </div>
-      <div class="col-md-6 mt-4 mb-7 ms-7 text-secondary">
+      <div class="col-md-6 mt-4 mb-7 text-secondary">
         <h2 class="mb-0">{{ product.title }}</h2>
         <p class="fw-bold">NT${{ product.price }}</p>
         <p>
