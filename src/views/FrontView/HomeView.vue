@@ -41,6 +41,7 @@
         <div class="card border-0 mb-4 position-relative position-relative">
           <img
             :src="product.imageUrl" alt="" class="object-fit-cover"
+            style="width: 100%; height: auto; aspect-ratio: 1 / 1;"
           />
           <div class="card-body p-0">
             <h4 class="mb-0 mt-4 text-info" width="50px">

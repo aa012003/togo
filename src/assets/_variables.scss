@@ -1769,3 +1769,7 @@ $pre-color:                         null !default;
   width: 100%; 
   border-bottom: 3px solid; 
 }
+@media (max-width: 1000px){
+  .text-info
+  {color: green;}
+    }

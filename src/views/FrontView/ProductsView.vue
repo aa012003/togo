@@ -12,7 +12,8 @@
         <RouterLink :to="`/product/${product.id}`" style="text-decoration: none;"
          class="col-md-3" v-for="product in products" :key="product.id">
           <div class="card border-0 mb-4 position-relative position-relative">
-            <img :src="product.imageUrl" alt="" class="object-fit-cover">
+            <img :src="product.imageUrl" alt="" class="object-fit-cover"
+            style="width: 100%; height: auto; aspect-ratio: 1 / 1;">
             <a class="text-dark">
               <i class="far fa-heart position-absolute" style="right: 16px; top: 16px"></i>
             </a>
