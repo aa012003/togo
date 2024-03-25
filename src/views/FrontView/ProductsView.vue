@@ -18,9 +18,14 @@
             </a>
             <div class="card-body p-0">
               <h6 class="mb-0 mt-3 ">
-                <div to="`/product/{product.id}`" class="text-info"
+                <div to="`/product/{product.id}`" class="text-info h4"
                 style="text-decoration: none;">
                 {{product.title}}
+                <button class="btn btn-danger ms-2 text-white"
+                style="position: relative; right: 0px; top: 0px;"
+              @click.prevent="addToCart(product.id, qty)">
+                <i class="bi bi-cart"></i>
+              </button>
                 <div class="text-danger h5"
                 v-if="product.origin_price == product.price">NT$ {{product.price}}</div>
                 <div v-else>
@@ -59,12 +64,16 @@
 
 <script>
 import axios from 'axios';
+import { mapActions } from 'pinia';
+import cartStore from '../../stores/cartStore';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
   data() {
     return {
       products: {},
+      product: {},
+      qty: 1,
       pages: {},
       selectedCategory: '',
       currentPage: 1,
@@ -95,6 +104,7 @@ export default {
       this.currentPage = page;
       this.getProducts();
     },
+    ...mapActions(cartStore, ['addToCart']),
   },
   mounted() {
     axios.get(`${VITE_URL}/api/${VITE_PATH}/categories`)

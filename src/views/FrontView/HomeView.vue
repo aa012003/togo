@@ -43,8 +43,12 @@
             :src="product.imageUrl" alt="" class="object-fit-cover"
           />
           <div class="card-body p-0">
-            <h4 class="mb-0 mt-4 text-info">
+            <h4 class="mb-0 mt-4 text-info" width="50px">
               {{product.title}}
+              <button class="btn btn-danger m-2 text-white"
+              @click.prevent="addToCart(product.id, qty)">
+                <i class="bi bi-cart"></i>
+              </button>
             </h4>
           </div>
         </div>
@@ -212,6 +216,7 @@
 </template>
 
 <script>
+import { mapActions } from 'pinia';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import axios from 'axios';
@@ -219,12 +224,14 @@ import axios from 'axios';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import cartStore from '../../stores/cartStore';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
   data() {
     return {
       modules: [Autoplay, Navigation, Pagination],
+      qty: 1,
       products: {},
       pages: {},
       currentPage: 1,
@@ -254,6 +261,7 @@ export default {
       this.currentPage = page;
       this.getProducts();
     },
+    ...mapActions(cartStore, ['addToCart']),
   },
   mounted() {
     this.getProducts();
