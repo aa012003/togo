@@ -83,8 +83,8 @@
 <script>
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import OrderModal from '../../components/OrderModal.vue';
-import DelModal from '../../components/DelModal.vue';
+import OrderModal from '@/components/OrderModal.vue';
+import DelModal from '@/components/DelModal.vue';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 

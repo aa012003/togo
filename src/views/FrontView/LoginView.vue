@@ -41,6 +41,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const { VITE_URL } = import.meta.env;
 
@@ -65,8 +66,8 @@ export default {
           this.$router.push('admin/product');
         })
         .catch((err) => {
-          console.log(err);
-          alert(err.response.data.message);
+          Swal.fire(err.response.data.message);
+          this.isLoading = false;
         });
     },
   },

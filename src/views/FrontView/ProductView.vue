@@ -17,7 +17,7 @@
       <div class="col-md-6 text-center">
         <img
           :src="product.imageUrl"
-          alt=""
+          alt="產品圖片"
           class="object-fit-cover"
           height="351px"
         />
@@ -58,7 +58,8 @@
 <script>
 import axios from 'axios';
 import { mapActions } from 'pinia';
-import cartStore from '../../stores/cartStore';
+import cartStore from '@/stores/cartStore';
+import Swal from 'sweetalert2';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
@@ -81,7 +82,11 @@ export default {
       axios.get(`${VITE_URL}/api/${VITE_PATH}/product/${id}`).then((res) => {
         this.product = res.data.product;
         this.isLoading = false;
-      });
+      })
+        .catch((err) => {
+          Swal.fire(err.response.data.message);
+          this.isLoading = false;
+        });
     },
     ...mapActions(cartStore, ['addToCart']),
   },

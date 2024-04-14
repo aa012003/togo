@@ -11,12 +11,12 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"/>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <RouterLink to="/admin/product" class="nav-link active">商品列表</RouterLink>
+            <RouterLink to="/admin/product" class="nav-link">商品列表</RouterLink>
           </li>
           <li class="nav-item">
             <RouterLink to="/admin/order" class="nav-link">訂單列表</RouterLink>
@@ -33,6 +33,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const { VITE_URL } = import.meta.env;
 
@@ -55,11 +56,11 @@ export default {
             this.checkSuccess = true;
           })
           .catch((err) => {
-            alert(err.response.data.message);
+            Swal.fire(err.response.data.message);
             this.$router.push('/login');
           });
       } else {
-        alert('您尚未登入。');
+        Swal.fire('您尚未登入。');
         this.$router.push('/login');
       }
     },
@@ -68,12 +69,12 @@ export default {
       axios
         .post(api)
         .then(() => {
-          alert('登出成功！');
+          Swal.fire('登出成功！');
           document.cookie = 'joyToken=; expires=; path=/';
           this.$router.push('/home');
         })
         .catch((err) => {
-          alert(err.response.data.message);
+          Swal.fire(err.response.data.message);
         });
     },
   },

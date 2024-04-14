@@ -12,27 +12,30 @@
         <RouterLink :to="`/product/${product.id}`" style="text-decoration: none;"
          class="col-md-3" v-for="product in products" :key="product.id">
           <div class="card border-0 mb-4 position-relative position-relative">
-            <img :src="product.imageUrl" alt="" class="object-fit-cover"
+            <img :src="product.imageUrl" alt="產品圖片" class="object-fit-cover"
             style="width: 100%; height: auto; aspect-ratio: 1 / 1;">
             <a class="text-dark">
-              <i class="far fa-heart position-absolute" style="right: 16px; top: 16px"></i>
+              <i class="far fa-heart position-absolute" style="right: 16px; top: 16px"/>
             </a>
             <div class="card-body p-0">
               <h6 class="mb-0 mt-3 ">
                 <div to="`/product/{product.id}`" class="text-info h4"
                 style="text-decoration: none;">
-                {{product.title}}
-                <button class="btn btn-danger ms-2 text-white"
-                style="position: relative; right: 0px; top: 0px;"
-              @click.prevent="addToCart(product.id, qty)">
-                <i class="bi bi-cart"></i>
-              </button>
-                <div class="text-danger h5"
-                v-if="product.origin_price == product.price">NT$ {{product.price}}</div>
+                {{ product.title }}
+                <div>
+                  <button class="btn btn-danger text-white mt-3"
+                    type="button"
+                    style="position: relative; right: 0px; top: 0px; width: 100%"
+                    @click.prevent="addToCart(product.id, qty)">
+                    <i class="bi bi-cart me-2"/>加入購物車
+                  </button>
+                </div>
+                <div class="text-danger h5 mt-3"
+                v-if="product.origin_price == product.price">NT$ {{ product.price }}</div>
                 <div v-else>
-                    <del class="text-light h6">NT$ {{product.origin_price}}
+                    <div class="text-danger h5 mt-3">NT$ {{ product.price }}
+                      <del class="text-light h6">NT$ {{ product.origin_price }}
                     </del>
-                    <div class="text-danger h5">NT$ {{product.price}}
                     </div>
                 </div>
                 </div>
@@ -66,7 +69,8 @@
 <script>
 import axios from 'axios';
 import { mapActions } from 'pinia';
-import cartStore from '../../stores/cartStore';
+import cartStore from '@/stores/cartStore';
+import Swal from 'sweetalert2';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 export default {
@@ -99,6 +103,10 @@ export default {
           this.pages = res.data.pagination;
           this.products = res.data.products;
           this.isLoading = false;
+        })
+        .catch((err) => {
+          Swal.fire(err.response.data.message);
+          this.isLoading = false;
         });
     },
     changePage(page) {
@@ -108,9 +116,13 @@ export default {
     ...mapActions(cartStore, ['addToCart']),
   },
   mounted() {
-    axios.get(`${VITE_URL}/api/${VITE_PATH}/categories`)
+    axios.get(`${VITE_URL}/api/${VITE_PATH}/products`)
       .then((res) => {
-        this.categories = res.data;
+        this.categories = res.data.pagination.category;
+      })
+      .catch((err) => {
+        Swal.fire(err.response.data.message);
+        this.isLoading = false;
       });
 
     this.getProducts();

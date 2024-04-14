@@ -9,7 +9,7 @@ import eslintPlugin from 'vite-plugin-eslint';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/togo/',
+  base: process.env.NODE_ENV === 'production' ? '/production-sub-path/' : '/',
   plugins: [
     vue(),
     eslintPlugin({

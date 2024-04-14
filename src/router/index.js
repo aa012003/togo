@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
+import Swal from 'sweetalert2';
 
 const routes = [
   {
@@ -6,7 +7,7 @@ const routes = [
     component: () => import('../views/FrontView.vue'),
     children: [
       {
-        path: 'home',
+        path: '',
         name: 'Home',
         component: () => import('../views/FrontView/HomeView.vue'),
       },
@@ -31,6 +32,14 @@ const routes = [
         path: 'login',
         component: () => import('../views/FrontView/LoginView.vue'),
       },
+      {
+        path: '/:pathMatch(.*)*',
+        component: () => import('../views/FrontView/HomeView.vue'),
+        beforeEnter: (to, from, next) => {
+          Swal.fire('哎呀~您的網址錯誤啦!');
+          next();
+        },
+      },
     ],
   },
   {
@@ -47,7 +56,11 @@ const routes = [
       },
       {
         path: '/admin:pathMatch(.*)*',
-        component: () => import('../views/FrontView/HomeView.vue'),
+        component: () => import('../views/FrontView/LoginView.vue'),
+        beforeEnter: (to, from, next) => {
+          Swal.fire('哎呀~您的網址錯誤啦!');
+          next();
+        },
       },
     ],
   },

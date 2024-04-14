@@ -1210,8 +1210,8 @@ $navbar-toggler-border-radius:      $btn-border-radius !default;
 $navbar-toggler-focus-width:        $btn-focus-width !default;
 $navbar-toggler-transition:         box-shadow .15s ease-in-out !default;
 
-$navbar-light-color:                rgba($indigo, .55) !default;
-$navbar-light-hover-color:          rgba($danger, 1) !default;
+$navbar-light-color:                rgba($indigo, .8) !default;
+$navbar-light-hover-color:          rgba($secondary, 1) !default;
 $navbar-light-active-color:         rgba($orange, 1) !default;
 $navbar-light-disabled-color:       rgba(var(--#{$prefix}emphasis-color-rgb), .3) !default;
 $navbar-light-icon-color:           rgba($body-color, .75) !default;
@@ -1749,27 +1749,3 @@ $kbd-bg:                            var(--#{$prefix}body-color) !default;
 $nested-kbd-font-weight:            null !default; // Deprecated in v5.2.0, removing in v6
 
 $pre-color:                         null !default;
-
-.navbar-light .navbar-nav > .nav-item > .nav-link {
-  position: relative;
-}
-
-.navbar-light .navbar-nav > .nav-item > .nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0;
-  height: 3px; 
-  border-bottom: transparent; 
-  transition: width 0.2s linear; 
-}
-
-.navbar-light .navbar-nav > .nav-item:hover > .nav-link::after {
-  width: 100%; 
-  border-bottom: 3px solid; 
-}
-@media (max-width: 1000px){
-  .text-info
-  {color: green;}
-    }

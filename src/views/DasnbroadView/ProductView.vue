@@ -8,7 +8,8 @@
       <h2 class="text-secondary">商品列表</h2>
     </div>
     <div class="text-end">
-      <button class="btn btn-secondary" @click="openModal('new')">建立新的產品</button>
+      <button class="btn btn-secondary"
+      type="button" @click="openModal('new')">建立新的產品</button>
     </div>
     <table class="table mt-4">
       <thead>
@@ -52,14 +53,14 @@
         </tr>
       </tbody>
     </table>
-    <PaginationComponent :pages="pages" :get-products="getProducts"></PaginationComponent>
+    <PaginationComponent :pages="pages" :get-products="getProducts"/>
   </div>
   <!-- Modal -->
   <ProductModal
     :update-product="updateProduct"
     :temp-product="tempProduct"
     ref="productModal"
-  ></ProductModal>
+  />
   <!-- delProductModal -->
   <div
     id="delProductModal"
@@ -102,8 +103,8 @@
 import axios from 'axios';
 import { Modal } from 'bootstrap';
 import Swal from 'sweetalert2';
-import PaginationComponent from '../../components/PaginationComponent.vue';
-import ProductModal from '../../components/ProductModal.vue';
+import PaginationComponent from '@/components/PaginationComponent.vue';
+import ProductModal from '@/components/ProductModal.vue';
 
 const { VITE_URL, VITE_PATH } = import.meta.env;
 
@@ -167,7 +168,7 @@ export default {
         .then((res) => {
           Swal.fire(res.data.message);
           this.$refs.productModal.hideModal();
-          this.getProducts(); // 取得所有產品的函式
+          this.getProducts();
         })
         .catch((err) => {
           if (
@@ -177,7 +178,6 @@ export default {
             || !this.tempProduct.origin_price
             || !this.tempProduct.price
           ) {
-            // 显示提示消息
             const errorMessage = err.response.data.message.join('\n');
             Swal.fire({
               icon: 'error',
@@ -201,7 +201,6 @@ export default {
     },
   },
   mounted() {
-    // 取出 Token
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)joyToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
     axios.defaults.headers.common.Authorization = token;
     this.getProducts();
